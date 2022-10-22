@@ -1,0 +1,28 @@
+---
+- name: "Run a shell command and find home folder of user '{{deploy_user}}'"
+  shell: "echo ~{{ deploy_user }}"
+  register: DEPLOY_USER_HOME
+
+- debug: var=deploy_user
+
+- debug: var=deploy_user_home
+
+- name: "Add the user '{{ deploy_user }}' with a primary group of 'docker'"
+  user:
+    name: "{{ deploy_user }}"
+    comment: Docker deployer
+    group: docker
+
+- name: "Create a 2048-bit SSH key for user '{{ deploy_user }}' in ~/.ssh/id_rsa"
+  user:
+    name: "{{ deploy_user }}"
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+
+- name: "Authorize user '{{ deploy_user }}' for remote access"
+  copy:
+    remote_src: yes
+    src: "{{ deploy_user_home }}/.ssh/id_rsa.pub"
+    dest: "{{ deploy_user_home }}/.ssh/authorized_keys"
+    owner: "{{ deploy_user }}"
+    mode: '0600'

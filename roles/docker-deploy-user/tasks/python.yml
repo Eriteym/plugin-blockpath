@@ -1,0 +1,15 @@
+---
+- name: Update apt repo and cache on all Debian/Ubuntu boxes
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: Install Pyhtin 3 PIP
+  apt:
+    name: python3-pip
+
+- name: Install python docker extension
+  pip:
+    name: docker
+
+- name: Install python docker-compose extension
+  pip:
+    name: docker-compose

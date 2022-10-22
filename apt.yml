@@ -1,0 +1,8 @@
+---
+- hosts:
+    - ws
+    - servers
+    - docker
+  become: true
+  roles:
+    - apt

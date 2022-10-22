@@ -1,0 +1,24 @@
+= Ansible office playbook
+
+== Update apt
+
+Update all linux infrastructure:
+
+[source,shell]
+----
+ansible-playbook apt.yml -kK
+----
+
+== Install gradle
+
+[source,shell]
+----
+ansible-playbook gradle.yml -kK
+----
+
+== Install docker and docker-compose
+
+[source,shell]
+----
+ansible-playbook docker.yml -kK
+----

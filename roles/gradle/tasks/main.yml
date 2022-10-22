@@ -1,0 +1,7 @@
+- name: Add Gradle ppa repository
+  apt_repository:
+    repo: ppa:cwchien/gradle
+
+- name: Install Gradle ppa version
+  apt:
+    name: gradle-ppa

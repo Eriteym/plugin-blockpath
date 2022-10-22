@@ -1,0 +1,45 @@
+---
+- name: Create management user
+  user:
+    name: "{{ user }}"
+    password: "{{ password }}"
+    groups:
+      - sudo
+    state: present
+
+- stat: path=/var/lib/AccountsService/users
+  register: account_system_folder
+
+- stat: path=/var/lib/AccountsService/users/{{ user }}
+  register: account_system_file
+
+- name: Set user as system account (existing)
+  lineinfile:
+    dest: /var/lib/AccountsService/users/{{ user }}
+    regexp: '^SystemAccount=false'
+    line: 'SystemAccount=true'
+    state: present
+  when: account_system_file.stat.exists == True
+
+- name: Set user as system account (non-existing)
+  template:
+    src: "{{ user }}"
+    dest: /var/lib/AccountsService/users/{{ user }}
+    owner: root
+    mode: '0600'
+  when: account_system_folder.stat.exists == True and account_system_file.stat.exists == False
+
+- name: Add {{ user }} to sudoers file
+  lineinfile:
+    path: /etc/sudoers
+    regexp: '^{{ user }}'
+    line: '{{ user }} ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: Populate service facts
+  service_facts:
+- name: Restart service accounts-daemon, in all cases
+  service:
+    name: accounts-daemon
+    state: restarted
+  when: "'accounts-daemon' in services"

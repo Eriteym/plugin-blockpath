@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  become: true
+  roles:
+    - apt
+    - firefox-esr
+    - system_user
+    - codium
+    - java
+    - gradle
+    - docker

@@ -1,0 +1,17 @@
+- name: remove firefox
+  apt:
+    name: firefox
+    state: absent
+
+- name: remove firefox (snap)
+  snap:
+    name: firefox
+    state: absent
+
+- name: Add Firefox ESR PPA repository
+  apt_repository:
+    repo: ppa:mozillateam/ppa
+
+- name: Install Gradle ppa version
+  apt:
+    name: firefox-esr

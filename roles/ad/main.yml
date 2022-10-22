@@ -1,0 +1,10 @@
+- name: Install AD support in Ubuntu
+  apt:
+    name:
+      - sssd-ad
+      - sssd-tools
+      - realmd
+      - adcli
+      - libnss-sss
+      - libpam-sss
+      - samba-common-bin
