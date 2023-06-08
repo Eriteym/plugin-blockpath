@@ -30,25 +30,20 @@ type blockPath struct {
 func New(_ context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
 	regexps := make([]*regexp.Regexp, len(config.Regex))
 	regexpsWhitelist := make([]*regexp.Regexp, len(config.RegexWhitelist))
-
 	for i, regex := range config.Regex {
 		re, err := regexp.Compile(regex)
 		if err != nil {
 			return nil, fmt.Errorf("error compiling regex %q: %w", regex, err)
 		}
-
 		regexps[i] = re
 	}
-
 	for i, regex := range config.RegexWhitelist {
 		re, err := regexp.Compile(regex)
 		if err != nil {
 			return nil, fmt.Errorf("error compiling regex %q: %w", regex, err)
 		}
-
 		regexpsWhitelist[i] = re
 	}
-
 	return &blockPath{
 		name:             name,
 		next:             next,
@@ -60,17 +55,12 @@ func New(_ context.Context, next http.Handler, config *Config, name string) (htt
 func (b *blockPath) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	currentPath := req.URL.EscapedPath()
 	isBlocked := false
-
-	// Check if the request should be blocked
 	for _, re := range b.regexps {
 		if re.MatchString(currentPath) {
-
 			isBlocked = true
 			break
 		}
 	}
-
-	// Only check for whitelist if the request was blocked
 	if isBlocked {
 		for _, re := range b.regexpsWhitelist {
 			if re.MatchString(currentPath) {
@@ -79,11 +69,9 @@ func (b *blockPath) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 			}
 		}
 	}
-
 	if isBlocked {
 		rw.WriteHeader(http.StatusForbidden)
 		return
 	}
-
 	b.next.ServeHTTP(rw, req)
 }
