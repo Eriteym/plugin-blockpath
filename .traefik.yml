@@ -1,7 +1,7 @@
 displayName: Block Path
 summary: Blocks HTTP requests with a path matching the configured regex.
 type: middleware
-import: github.com/Eriteym/plugin-blockpath
+import: stx_blockpath
 compatibility: TODO
 testData:
   Regex:
