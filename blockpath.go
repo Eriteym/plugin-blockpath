@@ -1,5 +1,6 @@
 // Package plugin_blockpath a plugin to block a path.
 package plugin_blockpath
+
 import (
 	"context"
 	"fmt"
@@ -26,16 +27,16 @@ type blockPath struct {
 }
 
 // New creates and returns a plugin instance.
-// New creates and returns a plugin instance. Ensure that all provided regex strings compile correctly.
 func New(_ context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
 	regexps := make([]*regexp.Regexp, len(config.Regex))
 	regexpsWhitelist := make([]*regexp.Regexp, len(config.RegexWhitelist))
-
+	
 	for i, regex := range config.Regex {
 		re, err := regexp.Compile(regex)
 		if err != nil {
 			return nil, fmt.Errorf("error compiling regex %q: %w", regex, err)
 		}
+
 		regexps[i] = re
 	}
 
@@ -47,7 +48,7 @@ func New(_ context.Context, next http.Handler, config *Config, name string) (htt
 
 		regexpsWhitelist[i] = re
 	}
-
+	
 	return &blockPath{
 		name:             name,
 		next:             next,
@@ -59,10 +60,11 @@ func New(_ context.Context, next http.Handler, config *Config, name string) (htt
 func (b *blockPath) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	currentPath := req.URL.EscapedPath()
 	isBlocked := false
-
-	// Check if the request should be blocked
+	
+	// Check if the request should be blocked	
 	for _, re := range b.regexps {
 		if re.MatchString(currentPath) {
+
 			isBlocked = true
 			break
 		}
@@ -77,12 +79,11 @@ func (b *blockPath) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 			}
 		}
 	}
-
-	// If still blocked, send a forbidden status
+	
 	if isBlocked {
 		rw.WriteHeader(http.StatusForbidden)
 		return
 	}
-
+	
 	b.next.ServeHTTP(rw, req)
 }
