@@ -9,7 +9,6 @@ import (
 
 // Config holds the plugin configuration.
 type Config struct {
-	Regex []string `json:"regex,omitempty"`
 	Regex          []string `json:"regex,omitempty"`
 	RegexWhitelist []string `json:"regexwhitelist,omitempty"`
 }
@@ -20,9 +19,6 @@ func CreateConfig() *Config {
 }
 
 type blockPath struct {
-	name    string
-	next    http.Handler
-	regexps []*regexp.Regexp
 	name             string
 	next             http.Handler
 	regexps          []*regexp.Regexp
@@ -53,9 +49,6 @@ func New(_ context.Context, next http.Handler, config *Config, name string) (htt
 	}
 
 	return &blockPath{
-		name:    name,
-		next:    next,
-		regexps: regexps,
 		name:             name,
 		next:             next,
 		regexps:          regexps,
@@ -70,8 +63,6 @@ func (b *blockPath) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	// Check if the request should be blocked
 	for _, re := range b.regexps {
 		if re.MatchString(currentPath) {
-			rw.WriteHeader(http.StatusForbidden)
-			return
 			isBlocked = true
 			break
 		}
