@@ -1,7 +1,6 @@
-- name: Add Gradle ppa repository
-  apt_repository:
-    repo: ppa:cwchien/gradle
-
-- name: Install Gradle ppa version
-  apt:
-    name: gradle-ppa
+- name: Install and set alternatives Gradle
+  shell: | 
+    wget https://services.gradle.org/distributions/gradle-{{ item }}-bin.zip -P /tmp
+    unzip -d $HOME/gradle /tmp/gradle-{{ item }}-bin.zip
+    update-alternatives --install /usr/bin/gradle gradle $HOME/gradle/gradle-${VERSION}/bin/gradle  1081
+  loop: [ '6.9.4', '7.6.1', '8.1.1' ]

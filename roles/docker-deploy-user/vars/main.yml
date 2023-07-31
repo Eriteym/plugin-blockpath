@@ -1,3 +1,0 @@
----
-deploy_user: "{{ lookup('env', 'DEPLOY_USER') or 'docker-deploy' }}"
-deploy_user_home: "{{ DEPLOY_USER_HOME.stdout }}"

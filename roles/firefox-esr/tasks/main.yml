@@ -12,6 +12,6 @@
   apt_repository:
     repo: ppa:mozillateam/ppa
 
-- name: Install Gradle ppa version
+- name: Install Firefox ppa version
   apt:
     name: firefox-esr
