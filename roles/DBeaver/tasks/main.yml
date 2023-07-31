@@ -1,0 +1,8 @@
+---
+- name: Add DBeaver-ce PPA repository
+  apt_repository:
+    repo: ppa:serge-rider/dbeaver-ce
+
+- name: Install DBeaver-ce ppa version
+  apt:
+    name: dbeaver-ce
