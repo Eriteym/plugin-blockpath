@@ -1,17 +1,7 @@
 ---
 - name: Install required system packages
   apt: name={{ item }} state=latest update_cache=yes
-  loop: ['wget', 'apt-transport-https', 'software-properties-common']
+  loop: ['libfuse2','libxi6','libxrender1','libxtst6','mesa-utils','libfontconfig', 'libgtk-3-bin','tar']
 
-- name: download the vscode apt key
-  shell: wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-
-- name: Add vscode Repository
-  apt_repository:
-    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
-    filename: vscode
-    state: present
-
-- name: Install vscode
-  apt:
-    name: vscode
+- name: download and install JetBrains toolbox
+  shell: curl -fsSL https://raw.githubusercontent.com/nagygergo/jetbrains-toolbox-install/master/jetbrains-toolbox.sh | bash

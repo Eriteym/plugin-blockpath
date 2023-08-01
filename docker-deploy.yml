@@ -1,8 +1,0 @@
----
-- hosts: docker_deploy
-  become: true
-  roles:
-    - apt
-    - system_user
-    - docker
-    - docker-deploy-user

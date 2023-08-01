@@ -1,7 +1,0 @@
----
-- hosts: docker
-  become: true
-  roles:
-    - apt
-    - system_user
-    - docker

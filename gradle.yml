@@ -1,5 +1,0 @@
----
-- hosts: gradle
-  become: true
-  roles:
-    - gradle

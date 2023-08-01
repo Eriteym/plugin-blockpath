@@ -1,0 +1,4 @@
+gradle_version_with_items:
+  - version: "6.9.4"
+  - version: "7.6.1"
+  - version: "8.1.1"

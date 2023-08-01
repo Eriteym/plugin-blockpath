@@ -1,0 +1,1 @@
+ansible-playbook -u "$DEPLOY_USER" -kK -i hosts -e 'ansible_python_interpreter=/usr/bin/python3' java_dev.yml --connection=local

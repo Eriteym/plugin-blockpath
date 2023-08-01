@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  become: true
+  roles:
+    - apt
+    - apt-tools
+    - java
+    - gradle
+    - docker
+    - DBeaver
+    - maven
+    - JetBrains_toolbox
+    - mattermost
+    - Telegram
+    - Virtualbox
+    - visualvm
+    - codium
+    - google-chrome
+    - dive

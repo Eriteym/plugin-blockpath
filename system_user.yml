@@ -1,5 +1,0 @@
----
-- hosts: localhost
-  become: true
-  roles:
-    - system_user

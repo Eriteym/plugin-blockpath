@@ -1,5 +1,0 @@
----
-- hosts: localhost
-  become: true
-  tasks:
-    - import_tasks: tasks/install_vscode.tasks.yml
