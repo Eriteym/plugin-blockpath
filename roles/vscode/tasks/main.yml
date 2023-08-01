@@ -1,14 +1,7 @@
 ---
-- name: Add Codium GPG apt Key
-  apt_key:
-    url: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
-    state: present
+- name: Install required system packages
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: ['libfuse2','libxi6','libxrender1','libxtst6','mesa-utils','libfontconfig', 'libgtk-3-bin','tar']
 
-- name: Add Codium repository
-  apt_repository:
-    repo: "deb https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs/ vscodium main"
-    filename: vscodium.list
-
-- name: Install Codium
-  apt:
-    name: codium
+- name: download and install JetBrains toolbox
+  shell: curl -fsSL https://raw.githubusercontent.com/nagygergo/jetbrains-toolbox-install/master/jetbrains-toolbox.sh | bash

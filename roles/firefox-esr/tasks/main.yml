@@ -1,17 +1,6 @@
-- name: remove firefox
+- name: set up the Mattermost repository on your system
+  shell: curl -o- https://deb.packages.mattermost.com/setup-repo.sh | sudo bash
+
+- name: Install Mattermost-desktop client version
   apt:
-    name: firefox
-    state: absent
-
-- name: remove firefox (snap)
-  snap:
-    name: firefox
-    state: absent
-
-- name: Add Firefox ESR PPA repository
-  apt_repository:
-    repo: ppa:mozillateam/ppa
-
-- name: Install Firefox ppa version
-  apt:
-    name: firefox-esr
+    name: mattermost-desktop

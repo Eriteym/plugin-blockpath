@@ -1,0 +1,4 @@
+---
+- name: Install required java jdk
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: ['openjdk-8-jdk', 'openjdk-11-jdk', 'openjdk-17-jdk']
