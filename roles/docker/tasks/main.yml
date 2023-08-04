@@ -19,3 +19,11 @@
 - name: Update apt and install docker-ce
   apt: update_cache=yes name=docker-ce state=latest
   loop: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-compose-plugin']
+
+- debug: var=deploy_user
+
+- name: "Add the user '{{ deploy_user }}' with a primary group of 'docker'"
+  user:
+    name: "{{ deploy_user }}"
+    comment: Docker user
+    group: docker

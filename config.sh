@@ -1,2 +1,2 @@
-export OS_USER=user
-export OS_USER_PASSWORD=user123
+export REMOTE_OS_USER=user
+export REMOTE_OS_USER_PASSWORD=user123
