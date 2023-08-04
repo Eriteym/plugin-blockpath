@@ -1,7 +1,3 @@
 ---
-- name: Install required system packages
-  apt: name={{ item }} state=latest update_cache=yes
-  loop: ['libfuse2','libxi6','libxrender1','libxtst6','mesa-utils','libfontconfig', 'libgtk-3-bin','tar']
-
 - name: download and install JetBrains toolbox
   shell: curl -fsSL https://raw.githubusercontent.com/nagygergo/jetbrains-toolbox-install/master/jetbrains-toolbox.sh | bash

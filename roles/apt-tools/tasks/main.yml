@@ -1,4 +1,4 @@
 ---
 - name: Install required system packages
   apt: name={{ item }} state=latest update_cache=yes
-  loop: ['mc', 'git', 'traceroute', 'htop', 'ctop']
+  loop: ['mc', 'git', 'traceroute', 'htop', 'ctop', 'libfuse2','libxi6','libxrender1','libxtst6','mesa-utils','libfontconfig', 'libgtk-3-bin','tar']
