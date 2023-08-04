@@ -1,0 +1,2 @@
+export OS_USER=user
+export OS_USER_PASSWORD=user123
