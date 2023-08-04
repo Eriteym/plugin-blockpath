@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  become: true
+  roles:
+    - { role: apt, become: yes }
+    - { role: apt-tools, become: yes }
+    - { role: java, become: yes }
+    - { role: gradle, become: yes }
+    - { role: docker, become: yes }
+    - { role: DBeaver, become: yes }
+    - { role: maven, become: yes }
+    - { role: JetBrains_toolbox, become: no }
+    - { role: mattermost, become: yes }
+    - { role: Telegram, become: yes }
+    - { role: Virtualbox, become: yes }
+    - { role: visualvm, become: yes }
+    - { role: codium, become: yes }
+    - { role: google-chrome, become: yes }
+    - { role: dive, become: yes }
+    - { role: azure_data_studio, become: yes }

@@ -1,0 +1,24 @@
+---
+- name: Install required system packages
+  apt: name=libunwind8 state=latest update_cache=yes
+
+- name: download the azure data studio in tmp dir
+  get_url:
+    url: https://azuredatastudio-update.azurewebsites.net/latest/linux-deb-x64/stable
+    dest: /tmp
+    mode: '0644'
+    force: true
+
+- name: Register package name
+  find:
+    paths: '/tmp'
+    patterns: 'azuredatastudio.*\.deb$'
+    file_type: "file"
+    use_regex: true
+  register: azure_data_studio_pkg
+
+- name: Install azure data studio
+  shell: dpkg -i {{ item.path }}
+  with_items: "{{ azure_data_studio_pkg.files }}"
+
+
