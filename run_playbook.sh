@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo apt install openssh-server ansible
+sudo apt install openssh-server ansible sshpass
 
 SCRIPTSRC=`readlink -f "$0" || echo "$0"`
 SCRIPT_PATH=`dirname "$SCRIPTSRC" || echo .`
