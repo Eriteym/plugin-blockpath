@@ -11,9 +11,9 @@
     - { role: maven, become: yes }
     - { role: JetBrains_toolbox, become: no }
     - { role: mattermost, become: yes }
-    - { role: Telegram, become: yes }
     - { role: Virtualbox, become: yes }
     - { role: visualvm, become: yes }
     - { role: codium, become: yes }
     - { role: google-chrome, become: yes }
     - { role: dive, become: yes }
+    - { role: Telegram, become: no }

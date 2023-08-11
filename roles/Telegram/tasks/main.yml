@@ -1,4 +1,41 @@
 ---
-- name: Install Telegram-Desktop
-  apt:
-    name: telegram-desktop
+- name: get latest telegram version
+  shell: curl -sL "https://api.github.com/repos/telegramdesktop/tdesktop/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/'
+  register: telegram_version
+
+- set_fact:
+    telegram_latest_vesion: "{{ telegram_version.stdout }}"
+
+- debug:
+    msg: "latest version of telegram: {{ telegram_latest_vesion }}"
+
+
+- name: download the telegram in tmp dir
+  get_url:
+    url: https://github.com/telegramdesktop/tdesktop/releases/download/v{{ telegram_latest_vesion }}/tsetup.{{ telegram_latest_vesion }}.tar.xz
+    dest: /tmp/tsetup.tar.xz
+    mode: '0644'
+    force: true
+
+- name: Check telegram unzip target path, if folder exists skip
+  stat:
+    path: "$HOME/telegram"
+  register: telegram_unzip_target
+  ignore_errors: True
+
+- debug:
+    msg: "{{ telegram_unzip_target }}"
+
+- name: Creates directory telegram
+  file:
+    path: $HOME/.telegram
+    state: directory
+
+- name: unarchive the telegram from tmp dir to $HOME
+  unarchive:
+    src: /tmp/tsetup.tar.xz
+    dest: $HOME/.telegram
+  when: telegram_unzip_target.stat.exists == False
+
+- name: install latest telegram version
+  shell: nohup $HOME/.telegram/Telegram/Updater &
