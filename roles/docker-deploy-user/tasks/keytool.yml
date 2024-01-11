@@ -1,0 +1,4 @@
+---
+- name: Install OpenJDK 11 (for keytool)
+  apt:
+    name: openjdk-11-jre-headless

@@ -1,0 +1,9 @@
+---
+- hosts: servers
+  become: true
+  roles:
+    - { role: apt, become: yes }
+    - { role: apt-tools, become: yes }
+    - { role: docker, become: yes }
+    - { role: dive, become: yes }
+    - { role: docker-deploy-user, become: yes }
