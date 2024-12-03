@@ -18,8 +18,6 @@ response when the requested HTTP path matches one the configured [regular expres
     version = "v0.2.1"
 ```
 
-test123
-
 ## Dynamic
 
 To configure the `Block Path` plugin you should create a [middleware](https://docs.traefik.io/middlewares/overview/) in 
