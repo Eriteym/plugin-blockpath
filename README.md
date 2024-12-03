@@ -8,7 +8,7 @@ dsfsfafasf
 
 ## Static
 
-```toml
+```tomlаыфыафыафыа
 [pilot]Block Path is a middleware plugin аываываыаываываываы
     token="xxx"
 
