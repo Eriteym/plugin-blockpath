@@ -25,7 +25,7 @@ and uses the `blockpath` middleware plugin to block all HTTP requests with a pat
 
 ```toml
 [http.routers]
-  [http.routers.my-router]
+  [http.routers.my-router]fafasf
     rule = "Host(`localhost`)"
     middlewares = ["block-foo"]
     service = "my-service"
