@@ -33,7 +33,7 @@ func New(_ context.Context, next http.Handler, config *Config, name string) (htt
 	for i, regex := range config.Regex {
 		re, err := regexp.Compile(regex)
 		if err != nil {
-			return nil, fmt.Errorf("error compiling regex %q: %w", regex, err)
+			return nil, fmt.Errorf("error compiling r11111egex %q: %w", regex, err)
 		}
 		regexps[i] = re
 	}
