@@ -40,7 +40,7 @@ func New(_ context.Context, next http.Handler, config *Config, name string) (htt
 	for i, regex := range config.RegexWhitelist {
 		re, err := regexp.Compile(regex)
 		if err != nil {
-			return nil, fmt.Errorf("error compiling regex %q: %w", regex, err)
+			return nil, fmt.Errorf("error compiling regex test123 %q: %w", regex, err)
 		}
 		regexpsWhitelist[i] = re
 	}
