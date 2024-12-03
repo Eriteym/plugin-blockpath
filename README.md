@@ -5,7 +5,6 @@
 Block Path is a middleware plugin for [Traefik](https://github.com/traefik/traefik) which sends an HTTP `403 Forbidden` 
 response when the requested HTTP path matches one the configured [regular expressions](https://github.com/google/re2/wiki/Syntax).
 
-## Configuration
 
 ## Static
 
