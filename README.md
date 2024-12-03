@@ -9,7 +9,7 @@ dsfsfafasf
 ## Static
 
 ```toml
-[pilot]Block Path is a middleware plugin 
+[pilot]Block Path is a middleware plugin аываываы
     token="xxx"
 
 [experimental.plugins.blockpath]
