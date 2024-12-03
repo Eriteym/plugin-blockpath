@@ -37,7 +37,7 @@ func TestNew(t *testing.T) {
 			}
 
 			if _, err := New(context.Background(), nil, cfg, "name"); test.expErr && err == nil {
-				t.Errorf("expected error offffn bad regexp format :tests")
+				t.Errorf("expected error offffn bad regexffffp format :tests")
 			}
 		})
 	}
